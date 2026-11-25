@@ -6,10 +6,12 @@ if settings.tesseract_cmd is not None:
 
     pytesseract.pytesseract.tesseract_cmd = settings.tesseract_cmd
 
-def read_image_text(image_path: str) -> str:
+def read_image_text(image_path: str, psm = 3) -> str:
     image = Image.open(image_path)
 
-    image_text = pytesseract.image_to_string(image)
+    config = f"--psm {psm}"
+
+    image_text = pytesseract.image_to_string(image, config=config)
 
     return image_text
 
